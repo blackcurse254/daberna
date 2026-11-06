@@ -1,0 +1,74 @@
+# Daberna Land VIP - Production Docker Compose
+# Architecture: PostgreSQL 16 + Node.js Server (Express + Socket.IO) + Nginx Reverse Proxy
+
+services:
+  # 1. PostgreSQL Database
+  postgres:
+    image: postgres:16-alpine
+    container_name: daberna-postgres
+    restart: always
+    environment:
+      POSTGRES_USER: ${POSTGRES_USER:-daberna_user}
+      POSTGRES_PASSWORD: ${POSTGRES_PASSWORD:-DabernaSecurePass2026_VIP}
+      POSTGRES_DB: ${POSTGRES_DB:-daberna_vip_db}
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+      - ./prisma/migrations/20261106_init/migration.sql:/docker-entrypoint-initdb.d/init.sql:ro
+    ports:
+      - "5432:5432"
+    healthcheck:
+      test: ["CMD-SHELL", "pg_isready -U ${POSTGRES_USER:-daberna_user} -d ${POSTGRES_DB:-daberna_vip_db}"]
+      interval: 10s
+      timeout: 5s
+      retries: 5
+    networks:
+      - daberna-network
+
+  # 2. Main Web Application & Real-time Socket Server
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    container_name: daberna-app
+    restart: always
+    depends_on:
+      postgres:
+        condition: service_healthy
+    environment:
+      NODE_ENV: production
+      PORT: 3000
+      DATABASE_URL: postgresql://${POSTGRES_USER:-daberna_user}:${POSTGRES_PASSWORD:-DabernaSecurePass2026_VIP}@postgres:5432/${POSTGRES_DB:-daberna_vip_db}?schema=public
+      SESSION_SECRET: ${SESSION_SECRET:-daberna_super_secret_hmac_key_2026_vip_secure_rng_seed}
+      ADMIN_INITIAL_PASSWORD: ${ADMIN_INITIAL_PASSWORD:-AdminSecurePassword@90}
+      CORS_ORIGIN: ${CORS_ORIGIN:-*}
+    ports:
+      - "3000:3000"
+    volumes:
+      - app_data:/app/data
+    networks:
+      - daberna-network
+
+  # 3. Nginx Reverse Proxy & SSL Termination
+  nginx:
+    image: nginx:alpine
+    container_name: daberna-nginx
+    restart: always
+    depends_on:
+      - app
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./nginx.conf:/etc/nginx/nginx.conf:ro
+      - ./certbot/conf:/etc/letsencrypt:ro
+      - ./certbot/www:/var/www/certbot:ro
+    networks:
+      - daberna-network
+
+volumes:
+  postgres_data:
+  app_data:
+
+networks:
+  daberna-network:
+    driver: bridge

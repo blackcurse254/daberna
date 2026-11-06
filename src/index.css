@@ -1,0 +1,70 @@
+@import "tailwindcss";
+
+@layer base {
+  :root {
+    --midnight: #11162B;
+    --deep-indigo: #22234A;
+    --electric-turquoise: #20D6C2;
+    --neon-violet: #9575FF;
+    --coral-accent: #FF7185;
+    --soft-ice: #EAF2FF;
+  }
+
+  body {
+    font-family: 'Vazirmatn', system-ui, -apple-system, sans-serif;
+    background-color: #11162B;
+    color: #EAF2FF;
+    overflow-x: hidden;
+  }
+
+  /* Custom Cyber Scrollbars */
+  ::-webkit-scrollbar {
+    width: 6px;
+    height: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: #11162B;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: #22234A;
+    border-radius: 9999px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: #9575FF;
+  }
+}
+
+/* Futuristic Glow & Grid Utilities */
+.bg-grid-pattern {
+  background-image: 
+    linear-gradient(to right, rgba(149, 117, 255, 0.05) 1px, transparent 1px),
+    linear-gradient(to bottom, rgba(32, 214, 194, 0.05) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+
+.glow-turquoise {
+  box-shadow: 0 0 20px -3px rgba(32, 214, 194, 0.45);
+}
+
+.glow-violet {
+  box-shadow: 0 0 24px -2px rgba(149, 117, 255, 0.45);
+}
+
+.glow-coral {
+  box-shadow: 0 0 20px -3px rgba(255, 113, 133, 0.45);
+}
+
+.glow-text-turquoise {
+  text-shadow: 0 0 12px rgba(32, 214, 194, 0.65);
+}
+
+.glow-text-violet {
+  text-shadow: 0 0 14px rgba(149, 117, 255, 0.7);
+}
+
+.glass-panel {
+  background: rgba(34, 35, 74, 0.65);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(149, 117, 255, 0.18);
+}

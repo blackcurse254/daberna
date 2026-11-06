@@ -1,0 +1,6 @@
+{
+  "name": "Daberna Land VIP",
+  "description": "پلتفرم تخصصی بازی دبرنا آنلاین با سرور متمرکز، گردونه ۳ بعدی، جوایز خطی و چت زنده",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}

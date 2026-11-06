@@ -1,0 +1,42 @@
+{
+  "users": [
+    {
+      "id": 999,
+      "username": "admin",
+      "passwordHash": "a612f41a9cf2bd7f671ee79f8e572e040ccbbc441d6f5a907b2def9cc2ee0df50c768830e065d8ec6fc27ec5f38d57b7d531e4c727206125196edbbae80d99c9",
+      "salt": "ca9b7768132a74fadf14868b524cb614",
+      "fullname": "مدیر کل سیستم",
+      "phone": "09000000000",
+      "email": "admin@daberna.vip",
+      "joinedDate": "۱۴۰۲/۰۱/۰۱",
+      "vipLevel": "SUPER ADMIN",
+      "totalGames": 0,
+      "totalWins": 0,
+      "totalScore": 0,
+      "chips": 0,
+      "status": "فعال",
+      "role": "SUPER_ADMIN",
+      "createdAt": "2026-11-06T01:56:38.170Z",
+      "updatedAt": "2026-11-06T01:56:38.170Z"
+    }
+  ],
+  "transactions": [],
+  "auditLogs": [
+    {
+      "id": 1,
+      "action": "SYSTEM_PURGE",
+      "performedBy": "SYSTEM",
+      "details": "تمامی کاربران و پیام‌های غیرواقعی پاکسازی شدند و موجودی‌ها صفر شد.",
+      "timestamp": "2026-11-06T13:00:00.000Z"
+    }
+  ],
+  "errorLogs": [],
+  "matches": [],
+  "config": {
+    "maintenanceMode": false,
+    "dailyBonusAmount": 0,
+    "freeStarterChips": 0,
+    "minEntryChips": 20000,
+    "chatEnabled": true
+  }
+}
